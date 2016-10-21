@@ -1,0 +1,10 @@
+body {
+  background-image: url("http://gph.is/1wWrUNN");
+  background-repeat: repeat-x;
+  background-color: black;
+}
+
+.container {
+  background-color: gray;
+  margin-top: 230px;
+}
