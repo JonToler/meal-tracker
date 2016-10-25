@@ -9,6 +9,21 @@ I want to view a list of foods I have logged.
 I want options to view all foods, only high-calorie foods (more than 500 calories), or only lower-calorie foods (less than 500 calories).
 I want to click a food to edit its name, details or calories (in case I decide to pretend my fries were 100 calories instead of 365).
 
+
+specs:
+
+If a user adds a meal to the list it will populate the list:
+ex: input: Waffles, calories 500, Good
+output: list Waffles.
+
+User can sort list by calories in food.
+ex input user: show meals with 500 calories or less.
+output: will display list of meals less than 500 calories.
+
+user can edit a meal item to change it.
+ex user input: change waffles to 200 calories.
+output: waffles will not be 200 calories.
+
 Installation
 
 Install Meal Tracker locally by cloning this repository:

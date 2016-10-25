@@ -20,7 +20,7 @@ import { CaloriesPipe } from './calories.pipe';
       <p>Calories</p>
     </div>
     <div class="col-md-6">
-      <p>Details and Comments</p>
+      <p>Details</p>
     </div>
     <div class="col-md-1 text-right">
       <p>Edit</p>
