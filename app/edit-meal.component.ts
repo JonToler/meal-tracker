@@ -4,40 +4,29 @@ import { Meal } from './meal.model';
 @Component({
   selector: 'edit-meal',
   template: `
-    <div *ngIf="childSelectedMeal">
-      <h1>Edit Meal</h1>
-      <div>
-        <label>Enter Meal Name:</label>
-        <input #newName>
-      </div>
-
-      <div>
-        <label>Enter Meal Calories:</label>
-        <input #newCalories>
-        </div>
-
-      <div>
-
-        <div>
-          <label>Enter Meal Details:</label>
-          <input #newDetails>
-          </div>
-
-        <div>
-        <button (click)="editClicked()">Edit</button>
-        <button (click)="doneClicked()">done</button>
-      </div>
+    <h3>Edit a meal's information</h3>
+    <div class="form-group">
+      <label>Edit name:</label>
+      <input [(ngModel)]="selectedMealItem.name" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Edit calories:</label>
+      <input [(ngModel)]="selectedMealItem.calories" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Edit details:</label>
+      <input [(ngModel)]="selectedMealItem.details" class="form-control">
+    </div>
+    <div>
+      <button (click)="doneClicked()" class="btn btn-success">Done!</button>
     </div>
   `
 })
 
 export class EditMealComponent {
-  @Input() childSelectedMeal: Meal;
-  @Output() doneClickedSender = new EventEmitter();
-  editClicked() {
-    this.doneClickedSender.emit();
-  }
+  @Input() selectedMealItem: Meal;
+  @Output() doneEditMealItemSender = new EventEmitter();
   doneClicked() {
-    this.childSelectedMeal.markDone();
+    this.doneEditMealItemSender.emit();
   }
 }

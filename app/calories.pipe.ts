@@ -1,35 +1,28 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {Meal} from './meal.model';
+import { Pipe, PipeTransform } from '@angular/core';
+import { Meal } from './meal.model';
 
 @Pipe({
-  name: "locations",
+  name: "calories",
   pure: false
 })
-export class LocationsPipe implements PipeTransform {
-  transform(input: Meal[], info) {
-    var caloricIntake = info;
+
+export class CaloriesPipe implements PipeTransform {
+  transform(input: Meal[], filter) {
     var output: Meal[] = [];
-    if(caloricIntake === "decadent") {
-      for (var i = 0; i < input.length; i++) {
-        if (input[i].calories === "decadent") {
+    if(filter === "Low") {
+      for (var i = 0; i < input.length; ++i) {
+        if(input[i].calories < 500) {
           output.push(input[i]);
         }
       }
       return output;
-    } else if (caloricIntake === "sustainable") {
-      for (var i = 0; i < input.length; i++) {
-        if (input[i].calories === "sustainable")  {
+    } else if (filter === "High") {
+      for (var i = 0; i < input.length; ++i) {
+        if(input[i].calories >= 500) {
           output.push(input[i]);
         }
       }
       return output;
-    } else if (caloricIntake === "weightLoss") {
-        for (var i = 0; i < input.length; i++) {
-          if (input[i].calories === "weightLoss")  {
-            output.push(input[i]);
-          }
-        }
-        return output;
     } else {
       return input;
     }

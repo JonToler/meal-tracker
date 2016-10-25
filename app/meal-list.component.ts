@@ -1,50 +1,59 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Meal } from './meal.model';
+import { CaloriesPipe } from './calories.pipe';
 
 @Component({
   selector: 'meal-list',
   template: `
-
-  Calories:
-  <select (change)="onChangeCalories($event.target.value)">
-    <option value="all" selected="selected">Show All</option>
-    <option value="decadent">Show Decadent</option>
-    <option value="sustainable" >Show Sustainable</option>
-    <option value="weightLoss" >Show WeightLoss</option>
+  <h3>Meal List</h3>
+  <select (change)="onFilterChange($event.target.value)" class="form-control">
+    <option value="All" selected="selected">Show All</option>
+    <option value="Low">Under 500 Calories</option>
+    <option value="High">500 Calories or More</option>
   </select>
-
-
-  <div *ngFor="let currentMeal of childMealList | locations:selectedCalories">
-    <h3>{{ currentMeal.name }}</h3>
-    <h3>{{ currentMeal.details }}</h3>
-    <div *ngIf="currentMeal.calories >= 1000">
-      <option value="decadent">{{currentMeal.calories}}
-      </div>
-
-    <h3>{{ currentMeal.calories }}</h3>
-    <button (click)="editButtonHasBeenClicked(currentMeal)">Edit</button>
+  <hr>
+  <div class="row">
+    <div class="col-md-3">
+      <p>Name</p>
+    </div>
+    <div class="col-md-2">
+      <p>Calories</p>
+    </div>
+    <div class="col-md-6">
+      <p>Details and Comments</p>
+    </div>
+    <div class="col-md-1 text-right">
+      <p>Edit</p>
+    </div>
   </div>
-`
+  <div *ngFor="let currentMealItem of childMealList | calories:caloriesFilterSetting" class="row">
+    <div class="col-md-3">
+      <p>{{ currentMealItem.name }}</p>
+    </div>
+    <div class="col-md-2">
+      <p>{{ currentMealItem.calories }}</p>
+    </div>
+    <div class="col-md-6">
+      <p>{{ currentMealItem.details }}</p>
+    </div>
+    <div class="col-md-1 text-right">
+      <button (click)="editButtonClicked(currentMealItem)" class="btn btn-sm">Edit</button>
+    </div>
+  </div>
+  `
 })
 
-export class MealListComponent {
-  public selectedCompleteness: string = "notDone";
-  public selectedCalories: string = "all";
-  public selectedDetails: string = "all";
+export class MealListComponent{
   @Input() childMealList: Meal[];
-  @Output() clickSender = new EventEmitter();
-  editButtonHasBeenClicked(mealToEdit: Meal) {
-    this.clickSender.emit(mealToEdit);
-  }
-  onChangeDone(optionFromMenu) {
-    this.selectedCompleteness = optionFromMenu;
+  @Output() clickEditSender = new EventEmitter();
+
+  caloriesFilterSetting: string = "All";
+
+  editButtonClicked(mealItemToEdit: Meal) {
+    this.clickEditSender.emit(mealItemToEdit);
   }
 
-  onChangeCalories(optionFromMenu) {
-    this.selectedCalories = optionFromMenu;
-  }
-
-  onChangeDetails(optionFromMenu) {
-    this.selectedDetails = optionFromMenu;
+  onFilterChange(optionFromMenu) {
+    this.caloriesFilterSetting = optionFromMenu;
   }
 }

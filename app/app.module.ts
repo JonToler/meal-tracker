@@ -1,12 +1,13 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { AppComponent }   from './app.component';
-import { MealListComponent } from './meal-list.component';
-import { EditMealComponent } from './edit-meal.component';
-import { NewMealComponent } from './new-meal.component';
-import { LocationsPipe } from './calories.pipe'; // import our pipe here
 
+import { AppComponent }   from './app.component';
+import { NewMealComponent } from './new-meal.component';
+import { MealListComponent }   from './meal-list.component';
+import { EditMealComponent } from './edit-meal.component';
+import { StatsComponent }   from './stats.component';
+import { CaloriesPipe } from './calories.pipe';
 
 
 @NgModule({
@@ -16,10 +17,11 @@ import { LocationsPipe } from './calories.pipe'; // import our pipe here
   ],
   declarations: [
     AppComponent,
+    NewMealComponent,
     MealListComponent,
     EditMealComponent,
-    NewMealComponent,
-    LocationsPipe,
+    StatsComponent,
+    CaloriesPipe,
   ],
   bootstrap:    [ AppComponent ]
 })

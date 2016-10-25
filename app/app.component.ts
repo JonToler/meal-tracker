@@ -5,34 +5,46 @@ import { Meal } from './meal.model';
   selector: 'my-app',
   template: `
   <div class="container">
-    <h1>My Meal Tracker App</h1>
-    <h1>{{name | lowercase}}</h1>
-
-    <meal-list
-      [childMealList]="masterMealList"
-      (clickSender)="showDetails($event)"
-     ></meal-list>
-    <new-meal
-      (newMealSender)="addMeal($event)"
-    ></new-meal>
+    <h1>Meal-Tracker</h1>
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-8">
+        <new-meal  *ngIf="!selectedMealItem"
+          (newMealSender)="addMealItem($event)"
+        ></new-meal>
+        <edit-meal *ngIf="selectedMealItem"
+          [selectedMealItem]="selectedMealItem"
+          (doneEditMealItemSender)="editMealItemComplete()"
+        ></edit-meal>
+      </div>
+    </div>
+    <meal-list *ngIf="allMeals.length > 0"
+      [childMealList]="allMeals"
+      (clickEditSender)="editMealItem($event)"
+    ></meal-list>
+    <hr>
+    <stats
+      [childMealList]="allMeals"
+    ></stats>
   </div>
   `
 })
 
 export class AppComponent {
-  public masterMealList: Meal[] = [
-      new Meal("Hamburger", "500", "decandent"),
-      new Meal("sushi", "high", "sustainable"),
-  ];
-  name = 'JON';
-  selectedMeal: Meal = null;
-  showDetails(clickedMeal: Meal) {
-    this.selectedMeal = clickedMeal;
+  public allMeals: Meal[] = [];
+
+  selectedMealItem: Meal = null;
+
+  addMealItem(newMealItem: Meal) {
+    this.allMeals.push(newMealItem);
   }
-  finishedEditing() {
-    this.selectedMeal = null;
+
+  editMealItem(mealItemToEdit: Meal) {
+    this.selectedMealItem = mealItemToEdit;
   }
-  addMeal(newMealFromChild: Meal) {
-    this.masterMealList.push(newMealFromChild);
+
+  editMealItemComplete() {
+    this.selectedMealItem = null;
   }
 }
