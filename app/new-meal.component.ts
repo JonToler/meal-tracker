@@ -10,11 +10,11 @@ import { Meal } from './meal.model';
       <input #newName  class="form-control">
     </div>
     <div class="form-group">
-      <label>How many calories? </label>
+      <label>How would you describe the meal?</label>
       <input #newCalories  class="form-control">
     </div>
     <div class="form-group">
-      <label>How would you describe the meal?</label>
+      <label>How many calories?</label>
       <input #newDetails class="form-control">
     </div>
     <button class="btn btn-primary" (click)="

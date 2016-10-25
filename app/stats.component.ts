@@ -6,13 +6,13 @@ import { Meal } from './meal.model';
   template: `
   <div class="row">
     <div class="col-md-4">
-      <p>Items Consumed: {{ childMealList.length }}</p>
+      <p>Consumed: {{ childMealList.length }}</p>
     </div>
     <div class="col-md-4 text-center">
       <p>Total Calories: {{ calculateCaloriesTotal(childMealList) }}</p>
     </div>
     <div class="col-md-4 text-right">
-      <p>Average Calories per Item: {{ displayCaloriesAverage(childMealList) }}</p>
+      <p>Average Calories: {{ displayCaloriesAverage(childMealList) }}</p>
     </div>
   </div>
   `
@@ -31,7 +31,7 @@ export class StatsComponent {
 
   displayCaloriesAverage(childMealList: Meal[]) {
     var totalCalories = this.calculateCaloriesTotal(childMealList);
-    return (totalCalories === 0 ? 0 : (totalCalories / childMealList.length).toFixed(0));
+    return (totalCalories === 0 ? 0: (totalCalories / childMealList.length).toFixed(0));
 
   }
 

@@ -16,13 +16,13 @@ import { CaloriesPipe } from './calories.pipe';
     <div class="col-md-3">
       <p>Name</p>
     </div>
-    <div class="col-md-2">
+    <div class="col-lg-2">
       <p>Calories</p>
     </div>
     <div class="col-md-6">
       <p>Details</p>
     </div>
-    <div class="col-md-1 text-right">
+    <div class="col-md-1">
       <p>Edit</p>
     </div>
   </div>
